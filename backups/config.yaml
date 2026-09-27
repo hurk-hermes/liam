@@ -4,9 +4,16 @@
 # This file configures CLI behavior; only documented secret environment
 # variables in .env take precedence over their corresponding settings.
 
+
+approvals:
+  mode: smart  # smart | manual | off
+  timeout: 300
+
+
 # Schema version of this file. The installers copy it to seed config.yaml, and
 # `hermes update` uses it to know which one-time migrations the file already
 # has. Hermes manages it: do not copy it into another config.
+  destructive_slash_confirm: false
 _config_version: 46
 
 # =============================================================================
@@ -974,6 +981,7 @@ prompt_caching:
 memory:
   # Agent's personal notes: environment facts, conventions, things learned
   memory_enabled: true
+  write_approval: true
 
   # User profile: preferences, communication style, expectations
   user_profile_enabled: true
@@ -1125,6 +1133,7 @@ skills:
   # Every N tool-calling iterations, remind the model to consider saving a skill.
   # Set to 0 to disable.
   creation_nudge_interval: 15
+  write_approval: true
 
   # External skill directories — share skills across tools/agents without
   # copying them into ~/.hermes/skills/.  Each path is expanded (~ and ${VAR})
@@ -2022,7 +2031,7 @@ display:
   #     prompt_symbol: "⚔"                  # Prompt symbol (bare token; renderers add trailing space)
   #   tool_prefix: "╎"                       # Tool output line prefix (default: ┊)
   #
-  skin: default
+  skin: daylight
 
 # =============================================================================
 # Model Aliases — short names for /model command
@@ -2325,3 +2334,7 @@ updates:
 #   # This runs ONCE per process at startup, so it cannot replace a credential
 #   # that expires mid-session. For a single provider whose token needs
 #   # re-minting during a session, use `providers.<name>.key_cmd` instead.
+onboarding:
+  seen:
+    profile_build_offered: true
+    tool_progress_prompt: true
